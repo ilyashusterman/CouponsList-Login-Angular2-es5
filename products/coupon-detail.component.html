@@ -1,0 +1,50 @@
+<div class='panel panel-primary' *ngIf='coupon'>
+    <div class='panel-heading' style='font-size:large'>
+        {{pageTitle + ': ' + coupon.title }}
+    </div>
+
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='row'>
+                    <div class='col-md-12'>Title:</div>
+                    <div class='col-md-12'>{{coupon.title}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>couponAmount:</div>
+                    <div class='col-md-6'>{{coupon.amount}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>startDate:</div>
+                    <div class='col-md-6'>{{coupon.startDate}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>endDate:</div>
+                    <div class='col-md-6'>{{coupon.endDate}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Price:</div>
+                    <div class='col-md-6'>{{coupon.price|currency:'USD':true}}</div>
+                </div>
+                 <div class='row'>
+                    <div class='col-md-3'>description:</div>
+                    <div class='col-md-6'>{{coupon.message}}</div>
+                </div>
+            </div>
+
+            <div class='col-md-6'>
+                <img class='center-block img-responsive' 
+                     [style.width.px]='200' 
+                     [style.margin.px]='2' 
+                     [src]='coupon.imagePath'
+                     [title]='coupon.title'>
+            </div>
+        </div>
+    </div>
+
+    <div class='panel-footer'>
+        <a class='btn btn-default' (click)='onBack()' style='width:80px'>
+            <i class='glyphicon glyphicon-chevron-left'></i> Back
+        </a>
+    </div>
+</div>

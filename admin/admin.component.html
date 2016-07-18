@@ -1,0 +1,166 @@
+    <div id="wrapper">
+               <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="AdminService"><i class="fa fa-comments"></i> <strong>Coupon Admin</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="Logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div id='sideNav' href='#'><i class='fa fa-caret-right'></i></div>
+            <div class="sidebar-collapse">
+
+                        <ul class="nav" id="main-menu">
+
+                            <li>
+                                <a href="AdminService"><i class="fa fa-home"></i> Main</a>
+                            </li>
+                            <li>
+                                <a href="AdminService?command=showCompanies"><i class="fa fa-users"></i>Company<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="AdminService?command=addComp"><i class="fa fa-plus-circle"></i>Add Company</a>
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=removeComp"><i class="fa fa-minus-circle"></i>Remove Company</a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <form method="get" action="AdminService">
+                                                    <a><i class="fa fa-search"></i>Choose Company Id</a><input type="number" name="id" id="idCompany" placeholder="ID number" required>
+                                                    <input type="hidden" name="command" value="removeComp" /><input type="submit" value="Remove">
+                                                </form>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=updateComp"><i class="fa fa-info-circle"></i>Update Company</a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <form method="get" action="AdminService">
+                                                    <a><i class="fa fa-search"></i>Choose Company Id</a><input type="number" name="id" id="idCompany" placeholder="ID number" required>
+                                                    <input type="hidden" name="command" value="updateComp" /><input type="submit" value="Update">
+                                                </form>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=showCompanies"><i class="fa fa-sitemap"></i>Companies</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="AdminService?command=showCustomers"><i class="fa fa-male"></i>Customer<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="AdminService?command=addCust"><i class="fa fa-plus-circle"></i>Add Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=removeCust"><i class="fa fa-minus-circle"></i>Remove Customer</a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <form method="get" action="AdminService">
+                                                    <a><i class="fa fa-search"></i> Choose Customer Id: </a><input type="number" name="id" id="idCustomer" placeholder="ID number" required>
+                                                    <input type="hidden" name="command" value="removeCust" /><input type="submit" value="Remove">
+                                                </form>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=updateCust"><i class="fa fa-info-circle"></i>Update Customer</a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <form method="get" action="AdminService">
+                                                    <a><i class="fa fa-search"></i> Choose Customer Id: </a><input type="number" name="id" id="idCustomer" placeholder="ID number" required>
+                                                    <input type="hidden" name="command" value="updateCust" /><input type="submit" value="Update">
+                                                </form>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=showCustomers"><i class="fa fa-users"></i>Customers</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="active-menu" href="AdminService?command=viewAllIncome"><i class="fa fa-money"></i>View Income<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="AdminService?command=viewAllIncome"><i class="fa fa-money"></i>Total Income</a>
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=incomeCust"><i class="fa fa-male"></i>Customer Income</a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <form method="get" action="AdminService">
+                                                    <a><i class="fa fa-search"></i>Choose Customer Id </a><input type="number" name="id" id="idCustomer" placeholder="ID number" required>
+                                                    <input type="hidden" name="command" value="incomeCust" /><input type="submit" value="Remove">
+                                                </form>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                    <li>
+                                        <a href="AdminService?command=incomeComp"><i class="fa fa-users"></i>Company Income</a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <form method="get" action="AdminService">
+                                                    <a><i class="fa fa-search"></i>Choose Company Id</a><input type="number" name="id" id="idCompany" placeholder="ID number" required>
+                                                    <input type="hidden" name="command" value="incomeComp" /><input type="submit" value="Update">
+                                                </form>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control" value="search for..">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="active-menu" href="AdminService"><i class="fa fa-fw fa-file"></i> Client Page</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </nav>
+        <!-- /. NAV SIDE  -->
+
+                <!-- /. PAGE WRAPPER  -->
+            </div>

@@ -1,0 +1,59 @@
+﻿    <div class="login-page">
+      <div class="form-group">
+        <!--#form="ngForm"-->
+    <form class="form" (submit)="login($event,user)" >
+  <div class="login-form" >
+
+      <div *ngIf="errorFlag" class="alert alert-danger">{{errorMessage}}</div>
+    <div class="form-group">
+      <input type="text" class="form-control" required 
+      placeholder="username" [(ngModel)]="user.username" 
+       #username="ngForm" >
+        <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+          Username is required
+        </div>
+    </div>
+    
+    <div class="form-group">
+      <input type="password" class="form-control" required placeholder="password" [(ngModel)]="user.password" #password="ngForm"/>
+       <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+          Password is required
+        </div>
+    </div>
+      <div class="form-group">
+      <select class="form-control" required [(ngModel)]="user.clientType" #clientType="ngForm" >
+                            <option *ngFor="let t of clientTypes" [value]="t">{{(t | lowercase)}}</option>
+						</select>
+                              <div [hidden]="clientType.valid || clientType.pristine" class="alert alert-danger">
+          Client Type is required
+        </div>
+      </div>
+      <!--<div class="form" [disabled]="!form.valid" >-->
+      <button type="submit" >login</button>
+      <div *ngIf='loading'>
+<div id="circularG">
+	<div id="circularG_1" class="circularG"></div>
+	<div id="circularG_2" class="circularG"></div>
+	<div id="circularG_3" class="circularG"></div>
+	<div id="circularG_4" class="circularG"></div>
+	<div id="circularG_5" class="circularG"></div>
+	<div id="circularG_6" class="circularG"></div>
+	<div id="circularG_7" class="circularG"></div>
+	<div id="circularG_8" class="circularG"></div>
+</div>
+      </div>
+</div>
+    </form>
+    <div class="form" >
+    <button class='btn btn-primary' (click)='toggleDebugWindow()'>
+                 {{debugWindow ? 'Close ' : 'Open '}} Debug text area
+                </button>
+    <div class="form-group" *ngIf="debugWindow">
+    <textarea class="form-control" rows="5">
+        {{user | json}}
+        </textarea>
+  </div>
+      </div>
+    </div>
+    </div>
+

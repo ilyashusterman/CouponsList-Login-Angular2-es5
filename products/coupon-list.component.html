@@ -1,0 +1,191 @@
+<div id="page-wrapper" >
+    <div id="page-inner">
+	<div class="row">
+    <div class="col-md-12">
+<div class='panel panel-default'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+        <div *ngIf='coupons && coupons.length' >Coupons</div>
+        <div *ngIf='companies && companies.length' >Companies</div>
+    </div>
+</div>
+    </div>
+	</div>
+    
+
+    <!-- Filter the Coupons   -->
+            <button class='btn btn-primary' *ngIf='coupons' (click)='toggleCouponListing()'> <!-- FIX ME ngif session   -->
+                 {{Addlisting ? 'Close ' : 'Add '}} Coupon Listing
+                </button>
+                <div class="form-group" *ngIf="Addlisting">
+
+		    <div class="panel-heading">Add Coupon</div>
+		                <div class="col-sm-12">
+<div class="form-group">
+  <label for="title">Title</label>
+  <input type="text" class="form-control" required
+   placeholder="Title of Coupon"  [(ngModel)]="newCoupon.title"
+        #title="ngForm" >
+        <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+          Title is required
+        </div>
+</div>
+<div class="form-group">
+  <label for="amount">Amount</label>
+  <input type="number" class="form-control" required
+    [(ngModel)]="newCoupon.amount"  #amount="ngForm" >
+        <div [hidden]="amount.valid || amount.pristine" class="alert alert-danger">
+          Amount is required
+        </div>
+</div>
+<div class="form-group">
+  <label for="power">Coupon Type</label>
+  <select class="form-control"  required
+    [(ngModel)]="newCoupon.type" #type="ngForm">
+    <option *ngFor="let t of CouponTypes" [value]="t">{{t}}</option>
+    <div [hidden]="type.valid || type.pristine" class="alert alert-danger">
+          Type is required
+        </div>
+  </select>
+</div>
+		                     </div>
+                    <div>
+		        <textarea class="form-control">{{newCoupon | json}}</textarea>
+					<button 
+							class="btn btn-primary listing-button"
+							(click)="addCoupon(newCoupon)"
+							>Add
+						</button>
+                        </div>
+		      </div>
+    
+
+
+    <div class="row">
+                <div class="col-md-12">
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-12'>Filter by:</div>
+            <div class='col-md-12'>
+                <input type='text' [(ngModel)]='listFilter' />
+            </div>
+        </div>
+        <div class='row' *ngIf='listFilter && coupons && coupons.length'>
+            <div class='col-md-6'>
+                <h3>Filtered by: {{listFilter}} </h3>
+            </div>
+        </div>
+
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+
+        <div class="table-responsive">
+            
+
+            <!--<table class='table table-striped table-bordered table-hover' *ngIf='coupons && coupons.length'>
+                <thead>
+                    <tr>
+                        <th>
+                            <button class='btn btn-primary' (click)='toggleImage()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>StartDate</th>
+                        <th>EndDate</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let coupon of coupons | couponFilter:listFilter'>
+                        <td>
+                            <img *ngIf='showImage'
+                                 [src]='coupon.imgPath'
+                                 [title]='coupon.title | uppercase'
+                                 [style.width.px]='imageWidth' 
+                                 [style.margin.px]='imageMargin' 
+                                 onError="this.src='app/assets/images/noImage.jpg';">
+                                 
+                        </td>
+                        <td> <a [routerLink]="['/coupon', coupon.id]">
+                            {{coupon.id+' : '+coupon.title }}
+                            </a>
+                        </td>
+                        <td>{{ coupon.title }}</td>
+                        <td>{{ coupon.type | lowercase }}</td>
+                        <td>{{ coupon.amount }}</td>
+                        <td>{{ timeToDate(coupon.startDate.nanos) | date }}</td>
+                        <td>{{ timeToDate(coupon.endDate.nanos) | date }}</td>
+                        <td>{{ coupon.price }}</td>
+                        <td>{{ coupon.massage }}</td>
+                    </tr>
+                </tbody>
+            </table>-->
+             <div class="container">
+      <div class="col-sm-4" 
+      *ngFor='let coupon of coupons | couponFilter:listFilter'>          
+        <div class="thumbnail">
+                              <img
+                                 [src]='coupon.imgPath'
+                                 [title]='coupon.title | uppercase'
+                                 [style.width.px]='imageWidth' 
+                                 [style.margin.px]='imageMargin' 
+                                 onError="this.src='app/assets/images/noImage.jpg';">
+          <div class="caption">
+            <div *ngIf="showDetails === true">
+              <h3><i class="glyphicon glyphicon-tag"> Price:</i> {{coupon.price}}</h3>
+              <h4><i class="glyphicon glyphicon-asterisk"> Title :</i>  {{coupon.title}} 
+              </h4>
+                <h4><span class="label label-primary label-sm"> Category : {{coupon.type}}</span></h4>
+              <h4><i class="glyphicon glyphicon-flash"> Amount:</i> {{coupon.amount}}</h4>
+              <h4><i class="glyphicon glyphicon-envelope"> Message:</i> {{coupon.massage}}</h4>
+              <h4><i class="glyphicon glyphicon-calendar"> Expire Date:</i>{{ timeToDate(coupon.endDate.nanos) | date }}</h4>
+
+            </div>             
+
+            <button class="btn btn-xs btn-success" 
+                    [hidden]="showDetails === true" 
+                    (click)="showDetails = !showDetails">
+                  <h5> {{showDetails ? 'Hide' : 'Show'}} Details</h5>
+            </button>
+        </div>
+        </div>
+      </div>
+             </div>
+
+                <div class='row' *ngIf='listFilter && companies && companies.length'>
+            <div class='col-md-6'>
+                <h3>Filtered by: {{listFilter}} </h3>
+            </div>
+        </div>
+        <div class="table-responsive">
+                        <table class='table table-striped table-bordered table-hover' *ngIf='companies && companies.length'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let company of companies | companyFilter:listFilter'>
+                        <td> <a [routerLink]="['/company', company.id]">
+                            {{company.id+' : '+company.compName}}
+                            </a>
+                        </td>
+                        <td>{{ company.compName }}</td>
+                        <td>{{ company.password }}</td>
+                        <td>{{ company.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    </div>
+</div>
+    </div>
+    </div>
+
